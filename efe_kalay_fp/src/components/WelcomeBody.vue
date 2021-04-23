@@ -117,18 +117,21 @@ li {
 
 @media (min-width: 400px) {
   .banner {
-    height: 320px;
+    height: 380px;
   }
   .video-player--banner {
     /* (480 - 320) / 2 = 80 */
     top: -80px;
-    height: 480px;
+    height: 540px;
+  }
+  .banner__content {
+    height: 400px;
   }
 }
 
 @media (min-width: 600px) {
   .banner {
-    height: 310px;
+    height: 480px;
   }
   .video-player--banner {
     /* (720 - 480) / 2 = 120 */
@@ -139,13 +142,16 @@ li {
 
 @media (min-width: 750px) {
   .banner {
-    height: 450px;
+    height: 500px;
   }
   .video-player--banner {
-    /* (960 - 640) / 2 = 160 */
-    top: -160px;
-    height: 960px;
+    /* (960 - 440) / 2 = 160 */
+    top: -250px;
+    height: 1000px;
   }
+    .banner__content {
+    height: 500px;
+ }
 }
 
 @media (min-width: 1000px) {
@@ -157,6 +163,9 @@ li {
     top: -200px;
     height: 1200px;
   }
+  .banner__content {
+    height: 500px;
+ }
 }
 
 @media (min-width: 2000px) {
