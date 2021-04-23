@@ -1,3 +1,3 @@
-# IT537 - Front End Web Development
+# IT537 - Front End Web Development Final Project
 
-This repository created for the Sabanci University Master's Degree in Information Technology for Professionals program. 
+This repository has been created for IT537 FinalProject by Efe Kalay. 
