@@ -1,4 +1,5 @@
 <template>
+<!-- eslint-disable max-len -->
 <div>
   <b-navbar type="dark" variant="dark">
     <b-navbar-nav>
@@ -9,18 +10,11 @@
       </b-navbar-brand>
     </b-navbar-nav>
     <b-navbar-nav>
+
       <b-nav-item href="#" to="/">Home</b-nav-item>
 
-      <b-nav-item-dropdown text="Lang" right>
-        <b-dropdown-item href="#">EN</b-dropdown-item>
-        <b-dropdown-item href="#">DE</b-dropdown-item>
-        <b-dropdown-item href="#">TR</b-dropdown-item>
-      </b-nav-item-dropdown>
-
-      <b-nav-item-dropdown text="User" right>
-        <b-dropdown-item href="#">Administrator</b-dropdown-item>
-        <b-dropdown-item href="#">Visitor</b-dropdown-item>
-        <b-dropdown-item href="#">Member</b-dropdown-item>
+      <b-nav-item-dropdown text="Departments" center>
+        <b-dropdown-item v-for="department in departments" :key="department.departmentId" @click="selectedDepId=department.departmentId, selectedDepName=department.displayName, changeDepInfo" to="/department">{{department.displayName}}</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>
 
@@ -35,6 +29,41 @@
   </b-navbar>
 </div>
 </template>
+
+<script>
+import eventBus from '@/main';
+
+export default {
+  name: 'Navbar',
+  props: {
+    selectedDepId: Number,
+    selectedDepName: String,
+  },
+
+  data() {
+    return {
+      departments: [],
+    };
+  },
+
+  methods: {
+    changeDepInfo() {
+      eventBus.$emit('selectedDepId', this.selectedDepId);
+      eventBus.$emit('selectedDepName', this.selectedDepName);
+    },
+  },
+
+  created() {
+    const url = 'https://collectionapi.metmuseum.org/public/collection/v1/departments';
+    fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        this.departments = response.departments;
+      });
+  },
+};
+</script>
+
 <style>
     .metLogo {
         width: 50px;

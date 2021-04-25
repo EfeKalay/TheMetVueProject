@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Vue from 'vue';
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
 import App from './App.vue';
@@ -11,7 +12,11 @@ Vue.use(BootstrapVueIcons);
 
 Vue.config.productionTip = false;
 
+const eventBus = new Vue();
+export default { eventBus };
+
 new Vue({
   router,
   render: (h) => h(App),
 }).$mount('#app');
+/* eslint-enable */
