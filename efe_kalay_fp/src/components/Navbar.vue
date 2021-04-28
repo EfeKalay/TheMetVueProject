@@ -14,7 +14,7 @@
       <b-nav-item href="#" to="/">Home</b-nav-item>
 
       <b-nav-item-dropdown text="Departments" center>
-        <b-dropdown-item v-for="department in departments" :key="department.departmentId" @click="selectedDepId=department.departmentId, selectedDepName=department.displayName, changeDepInfo" to="/department">{{department.displayName}}</b-dropdown-item>
+        <b-dropdown-item v-for="department in departments" :key="department.departmentId" @click="selectedDepId=department.departmentId, selectedDepName=department.displayName, changeDepInfo" :to="goDepartment(department.departmentId)">{{department.displayName}}</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>
 
@@ -50,6 +50,9 @@ export default {
     changeDepInfo() {
       eventBus.$emit('selectedDepId', this.selectedDepId);
       eventBus.$emit('selectedDepName', this.selectedDepName);
+    },
+    goDepartment(departmendId) {
+      return `/department/${departmendId}`;
     },
   },
 

@@ -6,8 +6,7 @@
 </template>
 
 <script>
-import eventBus from '@/main';
-
+/* eslint-disable */
 export default {
   name: 'Department',
   props: {
@@ -21,12 +20,7 @@ export default {
     };
   },
   created() {
-    eventBus.$on('selectedDepId', (departmentId) => {
-      this.departmentId = departmentId;
-    });
-    eventBus.$on('selectedDepName', (displayedName) => {
-      this.displayedName = displayedName;
-    });
+    console.log('Department ID is... ' + `${this.$route.params.id}`);
     const url = 'https://collectionapi.metmuseum.org/public/collection/v1/departments';
     fetch(url)
       .then((response) => response.json())
