@@ -14,15 +14,15 @@
       <b-nav-item href="#" to="/">Home</b-nav-item>
 
       <b-nav-item-dropdown text="Departments" center>
-        <b-dropdown-item v-for="department in departments" :key="department.departmentId" @click="selectedDepId=department.departmentId, selectedDepName=department.displayName, changeDepInfo" :to="goDepartment(department.departmentId)">{{department.displayName}}</b-dropdown-item>
+        <b-dropdown-item v-for="department in departments" :key="department.departmentId" :to="goDepartment(department.departmentId)">{{department.displayName}}</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>
 
     <b-navbar-nav class="ml-auto">
         <b-nav-item href="#" to="/about">About The Met</b-nav-item>
         <b-nav-form>
-          <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-          <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+          <b-form-input v-model="query" @keypress.enter="goSearch()" size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+          <b-button size="sm" class="my-2 my-sm-0" :to="goSearch()">Search</b-button>
         </b-nav-form>
     </b-navbar-nav>
 
@@ -31,28 +31,23 @@
 </template>
 
 <script>
-import eventBus from '@/main';
 
 export default {
   name: 'Navbar',
-  props: {
-    selectedDepId: Number,
-    selectedDepName: String,
-  },
 
   data() {
     return {
       departments: [],
+      query: '',
     };
   },
 
   methods: {
-    changeDepInfo() {
-      eventBus.$emit('selectedDepId', this.selectedDepId);
-      eventBus.$emit('selectedDepName', this.selectedDepName);
-    },
     goDepartment(departmendId) {
       return `/department/${departmendId}`;
+    },
+    goSearch() {
+      return `/searchres/${this.query}`;
     },
   },
 

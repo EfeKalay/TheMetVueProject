@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable -->
-  <div class="department">
-    <h1>Department number {{ this.$route.params.id }} items</h1>
+  <div class="searchres">
+    <h1>Results for {{ this.$route.params.searchQuery }}</h1>
     <ul style="list-style-type:none;">
       <li v-for="object in objects" :key="object.objectID">
         <div class="center-div">
@@ -44,10 +44,10 @@
 <!-- eslint-disable -->
 <script>
 export default {
-  name: "Department",
+  name: "SearchRes",
   data() {
     return {
-      departmentId: Number,
+      query: '',
       objectDetails: Object,
       objectIds: [],
       objects: []
@@ -70,8 +70,8 @@ export default {
   },
 
   created() {
-    this.departmentId = this.$route.params.id;
-    const url = `https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${this.$route.params.id}`;
+    this.query = this.$route.params.searchQuery;
+    const url = `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${this.$route.params.searchQuery}`;
     fetch(url)
       .then(response => response.json())
       .then(response => {
@@ -83,9 +83,9 @@ export default {
       });
   },
   updated() {
-    if (this.$route.params.id != this.departmentId) {
-      this.departmentId = this.$route.params.id;
-      const url = `https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${this.$route.params.id}`;
+    if (this.$route.params.searchQuery != this.query) {
+      this.query = this.$route.params.searchQuery;
+      const url = `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${this.$route.params.searchQuery}`;
       fetch(url)
         .then(response => response.json())
         .then(response => {
