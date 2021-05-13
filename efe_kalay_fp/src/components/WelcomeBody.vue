@@ -15,6 +15,7 @@
         </div>
       </div>
     </div>
+    <hr>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore provident dolor mollitia id officiis sunt consectetur! Sapiente eveniet culpa porro tenetur quisquam voluptates, sunt, doloremque voluptatibus velit vel at voluptatum.</p>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore provident dolor mollitia id officiis sunt consectetur! Sapiente eveniet culpa porro tenetur quisquam voluptates, sunt, doloremque voluptatibus velit vel at voluptatum.</p>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore provident dolor mollitia id officiis sunt consectetur! Sapiente eveniet culpa porro tenetur quisquam voluptates, sunt, doloremque voluptatibus velit vel at voluptatum.</p>
@@ -33,7 +34,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;

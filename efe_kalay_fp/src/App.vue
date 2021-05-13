@@ -2,6 +2,13 @@
   <div id="app">
     <navbar class="navbar-fix"></navbar>
     <router-view/>
+    <hr class="featurette-divider">
+    <footer class="container padding-bot">
+      <p class="float-end">
+        <a href="#">Back to top</a>
+      </p>
+      <p>© 2021 The Metropolitan Museum Org. </p>
+   </footer>
   </div>
 </template>
 
@@ -42,6 +49,18 @@ export default ({
   position: sticky;
   top: 0;
   z-index:1;
+}
+
+.float-end {
+  float: right;
+}
+
+.featurette-divider {
+  margin: 5em;
+}
+
+.padding-bot {
+  padding-bottom: 3em;
 }
 
 </style>
