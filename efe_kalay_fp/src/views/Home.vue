@@ -14,11 +14,7 @@ export default {
   components: {
     WelcomeBody,
   },
-  data() {
-    return {
-      gifs: [],
-    };
-  },
+
   created() {
     const url = 'https://collectionapi.metmuseum.org/public/collection/v1/departments';
     fetch(url)

@@ -16,20 +16,88 @@
       </div>
     </div>
     <hr>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore provident dolor mollitia id officiis sunt consectetur! Sapiente eveniet culpa porro tenetur quisquam voluptates, sunt, doloremque voluptatibus velit vel at voluptatum.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore provident dolor mollitia id officiis sunt consectetur! Sapiente eveniet culpa porro tenetur quisquam voluptates, sunt, doloremque voluptatibus velit vel at voluptatum.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore provident dolor mollitia id officiis sunt consectetur! Sapiente eveniet culpa porro tenetur quisquam voluptates, sunt, doloremque voluptatibus velit vel at voluptatum.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore provident dolor mollitia id officiis sunt consectetur! Sapiente eveniet culpa porro tenetur quisquam voluptates, sunt, doloremque voluptatibus velit vel at voluptatum.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore provident dolor mollitia id officiis sunt consectetur! Sapiente eveniet culpa porro tenetur quisquam voluptates, sunt, doloremque voluptatibus velit vel at voluptatum.</p>
-
+    <div class="marg5">
+      <p>Since its founding in 1870, The Met has always aspired to be more than a treasury of rare and beautiful objects. Every day, art comes alive in the Museum's galleries and through its exhibitions and events, revealing new ideas and unexpected connections across time and across cultures.</p>
+      <br>
+      <p>The Met Celebrates 150 Years With An Exhibit That Shows Why Encyclopedic Museums Are Anything But Old-Fashioned. Early in the 20th century, the best place to look at lace in the United States was the Metropolitan Museum of Art.</p>
+    </div>
+    <hr>
+    <h2>Highlighteds by The Met</h2>
+    <div class="caro">
+      <b-carousel
+      id="carousel-1"
+      v-model="slide"
+      :interval="4000"
+      controls
+      indicators
+      background="#ababab"
+      img-width="512"
+      img-height="240"
+      style="text-shadow: 1px 1px 2px #333;"
+      @sliding-start="onSlideStart"
+      @sliding-end="onSlideEnd">
+        <b-carousel-slide :img-src="objects[0].primaryImageSmall" >
+          <h1>{{ objects[0].objectName }}</h1>
+        </b-carousel-slide>
+        <b-carousel-slide :img-src="objects[1].primaryImageSmall">
+          <h1>{{ objects[1].objectName }}</h1>
+        </b-carousel-slide>
+        <b-carousel-slide :img-src="objects[2].primaryImageSmall">
+          <h1>{{ objects[2].objectName }}</h1>
+        </b-carousel-slide>
+        <b-carousel-slide :img-src="objects[3].primaryImageSmall">
+          <h1>{{ objects[3].objectName }}</h1>
+        </b-carousel-slide>
+        <b-carousel-slide :img-src="objects[4].primaryImageSmall">
+          <h1>{{ objects[4].objectName }}</h1>
+        </b-carousel-slide>
+      </b-carousel>
+    </div>
   </div>
 </template>
-
+<!-- eslint-disable -->
 <script>
 export default {
   name: 'WelcomeBody',
   props: {
     msg: String,
+  },
+
+  data() {
+    return {
+      departmentId: Number,
+      objectDetails: Object,
+      objectIds: [],
+      objects: [],
+    };
+  },
+
+  methods: {
+    getItemDetails(num) {
+      console.log(`get item details ${num}`);
+      const url2 = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${num}`;
+      fetch(url2)
+        .then(response => response.json())
+        .then(response => {
+          this.objects.push(response);
+        });
+    },
+    goDetail(id) {
+      return `/detail/${id}`;
+    },
+  },
+
+  created() {
+    const url = 'https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&q=all';
+    fetch(url)
+      .then(response => response.json())
+      .then(response => {
+        this.objectIds = response.objectIDs.slice(0, 5);
+        this.objects = [];
+        response.objectIDs.slice(0, 5).forEach(num => {
+          this.getItemDetails(num);
+        });
+      });
   },
 };
 </script>
@@ -119,6 +187,12 @@ li {
   font-family: Arial, sans-serif;
   font-weight: bold;
   color: #ffffff;
+}
+.caro{
+  display: inline-block;
+  width: auto;
+  height: 50%;
+  margin: auto;
 }
 
 @media (min-width: 400px) {
